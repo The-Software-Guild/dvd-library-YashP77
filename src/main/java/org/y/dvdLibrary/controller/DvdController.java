@@ -23,39 +23,43 @@ public class DvdController {
     public void run() {
         boolean keepGoing = true;
         int menuSelection = 0;
-        while (keepGoing) {
+        try {
+            while (keepGoing) {
 
-            menuSelection = getMenuSelection();
+                menuSelection = getMenuSelection();
 
-            switch (menuSelection) {
-                case 1:
-                    listDvd();
-                    break;
-                case 2:
-                    addDvd();
-                    break;
-                case 3:
-                    viewDvd();
-                    break;
-                case 4:
-                    removeDvd();
-                    break;
-                case 5:
-                    keepGoing = false;
-                    break;
-                default:
-                    unknownCommand();
+                switch (menuSelection) {
+                    case 1:
+                        listDvd();
+                        break;
+                    case 2:
+                        addDvd();
+                        break;
+                    case 3:
+                        viewDvd();
+                        break;
+                    case 4:
+                        removeDvd();
+                        break;
+                    case 5:
+                        keepGoing = false;
+                        break;
+                    default:
+                        unknownCommand();
+                }
+
             }
-
+            exitMessage();
+        } catch (DvdDaoException e) {
+            view.displayErrorMessage(e.getMessage());
         }
-        exitMessage();
     }
 
     private int getMenuSelection(){
         return view.printMenuAndGetSelection();
     }
 
-    private void addDvd(){
+    private void addDvd() throws DvdDaoException{
 
         view.displayAddDvdBanner();
         Dvd newDvd = view.getNewDvdInfo();
@@ -64,20 +68,20 @@ public class DvdController {
 
     }
 
-    private void listDvd() {
+    private void listDvd() throws DvdDaoException {
         view.displayDvdListBanner();
         List<Dvd> dvdList = dao.getAllDvds();
         view.displayDvdList(dvdList);
     }
 
-    private void viewDvd() {
+    private void viewDvd() throws DvdDaoException {
         view.displayDvdBanner();
         String title = view.getDvdChoice();
         Dvd dvd = dao.getDvd(title);
         view.displayDvd(dvd);
     }
 
-    private void removeDvd() {
+    private void removeDvd() throws DvdDaoException {
         view.displayRemoveDvdBanner();
         String title = view.getDvdChoice();
         Dvd delDvd = dao.removeDvd(title);
