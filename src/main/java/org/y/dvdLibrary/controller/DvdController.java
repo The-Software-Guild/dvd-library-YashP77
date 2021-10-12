@@ -42,6 +42,9 @@ public class DvdController {
                         removeDvd();
                         break;
                     case 5:
+                        editDvd();
+                        break;
+                    case 6:
                         keepGoing = false;
                         break;
                     default:
@@ -86,6 +89,19 @@ public class DvdController {
         String title = view.getDvdChoice();
         Dvd delDvd = dao.removeDvd(title);
         view.displayRemoveResult(delDvd);
+    }
+
+    private void editDvd() throws DvdDaoException{
+
+        view.displayEditDvdBanner();
+        String title = view.getDvdEditChoice();
+        String choice = view.getDvdEditField();
+        String input = view.getDvdEditInput();
+        dao.editDvd(title,choice,input);
+        view.displayEditSuccessBanner();
+
+
+
     }
 
     private void unknownCommand() {

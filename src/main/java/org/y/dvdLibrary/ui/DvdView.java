@@ -17,13 +17,14 @@ public class DvdView {
     public int printMenuAndGetSelection(){
 
         io.print("Main Menu");
-        io.print("1. List Students");
-        io.print("2. Create New Student");
-        io.print("3. View a Student");
-        io.print("4. Remove a Student");
-        io.print("5. Exit");
+        io.print("1. List DVD");
+        io.print("2. Add DVD");
+        io.print("3. View a DVD");
+        io.print("4. Remove a DVD");
+        io.print("5. Edit DVD");
+        io.print("6. Exit");
 
-        return io.readInt("Please select from the above choices.", 1, 5);
+        return io.readInt("Please select from the above choices.", 1, 6);
 
     }
 
@@ -119,6 +120,34 @@ public class DvdView {
     public void displayErrorMessage(String errorMsg) {
         io.print("=== ERROR ===");
         io.print(errorMsg);
+    }
+
+    public void displayEditDvdBanner(){
+        io.print("=== Edit DVD ===");
+    }
+
+    public void displayEditSuccessBanner() {
+        io.readString(
+                "Dvd successfully edited.  Please hit enter to continue");
+    }
+
+    public String getDvdEditChoice(){
+
+        return io.readString("Please enter title of DVD you would like to edit");
+
+    }
+
+    public String getDvdEditField(){
+
+        return io.readString("Which field would you like to change? \n" +
+                "Release date \nMPAA rating \nDirectors name \nStudio \nUser rating");
+
+    }
+
+    public String getDvdEditInput(){
+
+        return io.readString("What information would you like to add?");
+
     }
 
 

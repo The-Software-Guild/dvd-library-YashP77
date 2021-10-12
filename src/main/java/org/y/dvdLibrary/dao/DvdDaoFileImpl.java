@@ -42,6 +42,36 @@ public class DvdDaoFileImpl implements DvdDao{
         writeRoster();
         return delDvd;
     }
+    @Override
+    public Dvd editDvd(String title, String choice, String input) throws DvdDaoException{
+
+        loadRoster();
+        Dvd tmp = dvds.get(title);
+        dvds.remove(title);
+
+        switch (choice){
+            case "Release date":
+                tmp.setReleaseDate(input);
+                break;
+            case "MPAA rating":
+                tmp.setMpaaRating(input);
+                break;
+            case "Directors name":
+                tmp.setDirName(input);
+                break;
+            case "Studio":
+                tmp.setStudio(input);
+                break;
+            case "User rating":
+                tmp.setUserRating(input);
+                break;
+        }
+
+        Dvd edit = tmp;
+        dvds.put(title,edit);
+        writeRoster();
+        return edit;
+    }
 
     private Dvd unmarshallDvd(String dvdAsText){
 

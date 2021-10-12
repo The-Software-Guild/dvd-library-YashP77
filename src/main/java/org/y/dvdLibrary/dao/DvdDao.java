@@ -14,4 +14,6 @@ public interface DvdDao {
 
     Dvd removeDvd(String title) throws DvdDaoException;
 
+    Dvd editDvd(String title, String choice, String input) throws DvdDaoException;
+
 }
